@@ -1,0 +1,41 @@
+.myTableStriped tr:nth-child(even) {
+    background-color: #8de7e7;
+}
+
+.myTableStriped tr:nth-child(odd) {
+    background-color: #f19a8e;
+}
+
+/*------------- Striped Lines----------------*/
+
+
+/*.table-striped-custom tbody tr:nth-child(odd),*/
+/*.table-striped-custom tbody tr:nth-child(odd) td {*/
+/*    background-color: #8de7e7 !important;*/
+/*}*/
+
+/*.table-striped-custom tbody tr:nth-child(even),*/
+/*.table-striped-custom tbody tr:nth-child(even) td {*/
+/*    background-color: #f19a8e !important;*/
+/*}*/
+
+.table-striped-custom tbody tr td:nth-child(odd) {
+    background-color: #fbf5ff;
+}
+
+.table-striped-custom tbody tr td:nth-child(even) {
+    background-color: #a9c8d9;
+}
+.success-color {
+    color: #96cc8b;
+    font-size: large;
+}
+.error-color{
+    color: #ef5c5c;
+    font-size: large;
+}
+.title {
+    color: #0f3593; /* Changer la couleur du titre */
+    font-weight: bold; /* Texte en gras */
+    /*font-style: italic; !* Texte en italique *!*/
+}

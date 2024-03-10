@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <f:loadBundle var="labels" basename="i18n.labels"/>
+    <h:head>
+        <h:outputStylesheet library="webjars" name="bootstrap/5.3.3/css/bootstrap.css"/>
+        <h:outputStylesheet library="css" name="myStyle.css"/>
+    </h:head>
+
+    <h:body class="d-flex flex-column min-vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 ml-md-auto">
+                <h:form>
+                    <div class="form-group row">
+                        <h4 class="col-sm-4 col-form-label text-primary font-size-85">#{labels.lang}:</h4>
+                        <div class="col-sm-8">
+                            <h:selectOneMenu id="locale" class="form-control" value="#{employeeBean.locale}" onchange="submit()"
+                                             valueChangeListener="#{employeeBean.localeChanged}">
+                                <f:selectItems value="#{employeeBean.countries}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+    <h3 Class="title" >#{labels.title}</h3>
+
+    <h3 Class="success-color" >#{employeeBean.msg_success}</h3>
+    <h3 Class="error-color" >#{employeeBean.msg_error}</h3>
+
+    <h:dataTable id="employeeDataTable" var="emp" value="#{employeeBean.paginatedEmployees}" styleClass="table table-striped align-content-center">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{labels.last_name}"/>
+            </f:facet>
+            <h:outputText value="#{emp.nom}" rendered="#{employeeBean.editRow ne emp.id}" />
+            <h:form>
+                <h:inputText id="newNom" value="#{employeeBean.employee.nom}" rendered="#{employeeBean.editRow eq emp.id}">
+                    <f:ajax event="valueChange" execute="@form" render="employeeDataTable @form" />
+                </h:inputText>
+            </h:form>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{labels.first_name}" />
+            </f:facet>
+            <h:outputText value="#{emp.prenom}" rendered="#{employeeBean.editRow ne emp.id}" />
+            <h:form>
+                <h:inputText id="newPrenom" value="#{employeeBean.employee.prenom}" rendered="#{employeeBean.editRow eq emp.id}">
+                    <f:ajax event="valueChange" execute="@form" render="employeeDataTable @form" />
+                </h:inputText>
+            </h:form>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{labels.email}" />
+            </f:facet>
+            <h:outputText value="#{emp.email}" rendered="#{employeeBean.editRow ne emp.id}" />
+            <h:form>
+                <h:inputText id="newEmail" value="#{employeeBean.employee.email}" rendered="#{employeeBean.editRow eq emp.id}">
+                    <f:ajax event="valueChange" execute="@form" render="employeeDataTable @form" />
+                </h:inputText>
+            </h:form>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{labels.salary}" />
+            </f:facet>
+            <h:outputText value="#{emp.sal}" rendered="#{employeeBean.editRow ne emp.id}" />
+            <h:form>
+                <h:inputText id="newSal" value="#{employeeBean.employee.sal}" rendered="#{employeeBean.editRow eq emp.id}">
+                    <f:ajax event="valueChange" execute="@form" render="employeeDataTable @form" />
+                </h:inputText>
+            </h:form>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="#{labels.action}"/>
+            </f:facet>
+            <div class="align-content-center">
+                <h:form>
+                    <h:commandButton styleClass="btn btn-outline-primary m-3" value="#{labels.edit}" action="#{employeeBean.showEditForm(emp.id, emp)}" rendered="#{employeeBean.editRow ne emp.id}" />
+                    <h:commandButton styleClass="btn btn-outline-warning" value="#{labels.delete}" action="#{employeeBean.deleteEmployee(emp.id)}" rendered="#{employeeBean.editRow ne emp.id}"/>
+                    <h:commandButton styleClass="btn btn-outline-warning" value="#{labels.save}"  action="#{employeeBean.editEmployee(employeeBean.employee)}" rendered="#{employeeBean.editRow eq emp.id}"/>
+                </h:form>
+            </div>
+        </h:column>
+    </h:dataTable>
+
+    <h:form rendered="#{employeeBean.showAddForm}">
+        <table class="table table-striped">
+            <tr>
+                <td><h:inputText value="#{employeeBean.newEmployee.nom}" required="true" placeholder="Nom"/></td>
+                <td><h:inputText value="#{employeeBean.newEmployee.prenom}" required="true" placeholder="Prenom"/></td>
+                <td><h:inputText value="#{employeeBean.newEmployee.email}" required="true" placeholder="Email"/></td>
+                <td><h:inputText value="#{employeeBean.newEmployee.sal}" required="true" placeholder="Salaire"/></td>
+                <td><h:commandButton styleClass="btn btn-outline-success m-3" value="#{labels.add}"
+                                     action="#{employeeBean.addEmployee(employeeBean.newEmployee)}" /></td>
+            </tr>
+        </table>
+    </h:form>
+
+    <h:form>
+        <h:commandButton value="#{labels.previous}" action="#{employeeBean.previousPage}" rendered="#{employeeBean.currentPage ne 1}" styleClass="btn btn-outline-info m-3"/>
+        <h:outputText value="#{labels.page} #{employeeBean.currentPage}" />
+        <h:commandButton value="#{labels.next}" action="#{employeeBean.nextPage}" rendered="#{employeeBean.currentPage lt employeeBean.totalPages}" styleClass="btn btn-outline-info m-3"/>
+    </h:form>
+
+    <h:form>
+        <h:commandButton  styleClass="btn btn-outline-success btn-lg" value="#{labels.newEmp}"
+                          action="#{employeeBean.setShowAddForm(true)}"/>
+    </h:form>
+
+    <h3 Class="title" >   </h3>
+
+    </div>
+
+    </h:body>
+</f:view>
+</html>
