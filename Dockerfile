@@ -1,7 +1,7 @@
 FROM tomcat:10-jdk11-openjdk
 
-COPY ./target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+COPY *.jar app.jar
 
 EXPOSE 8080
-
-CMD ["catalina.sh", "run"]
+CMD ["catalina.sh","run"]
