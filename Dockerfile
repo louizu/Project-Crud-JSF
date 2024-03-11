@@ -1,4 +1,4 @@
-FROM maven:3.3.2-openjdk-17 AS builder
+FROM maven:4.0.0-openjdk-17 AS builder
 
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
