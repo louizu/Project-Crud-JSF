@@ -20,18 +20,18 @@
     </context-param>
     <context-param>
         <param-name>url.bdd</param-name>
-<!--        <param-value>jdbc:mysql://mysql-322ebb87-project22-2002.a.aivencloud.com:28624/defaultdb?sslmode=require</param-value>-->
-        <param-value>jdbc:mysql://localhost:3306/jpabdd</param-value>
+       <param-value>jdbc:mysql://mysql-322ebb87-project22-2002.a.aivencloud.com:28624/defaultdb?sslmode=require</param-value>
+<!--         <param-value>jdbc:mysql://localhost:3306/jpabdd</param-value> -->
     </context-param>
     <context-param>
         <param-name>pwd.bdd</param-name>
-<!--        <param-value>AVNS_aSY9mjccImAWivfoym1</param-value>-->
-        <param-value></param-value>
+       <param-value>AVNS_aSY9mjccImAWivfoym1</param-value>
+<!--         <param-value></param-value> -->
     </context-param>
     <context-param>
         <param-name>user.bdd</param-name>
-<!--        <param-value>avnadmin</param-value>-->
-        <param-value>root</param-value>
+       <param-value>avnadmin</param-value>
+<!--         <param-value>root</param-value> -->
     </context-param>
     
     
