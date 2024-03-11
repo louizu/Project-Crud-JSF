@@ -1,4 +1,4 @@
-FROM maven:4.0.0-dk-21 AS builder
+FROM maven:4.0.0-jdk-21 AS builder
 
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
