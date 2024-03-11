@@ -8,6 +8,7 @@
     <artifactId>jsf_bdd_bean_form_devoir</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>jsf_bdd_bean_form_devoir</name>
+         <packaging>war</packaging>
 
 
     <properties>
